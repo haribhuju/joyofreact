@@ -12,11 +12,20 @@ console.info({ answer });
 
 function Game() {
   const [guesses, setGuessess] = useState([]);
+  const [gameStatus, setGameStatus] = useState("running");
+
   function handleGuesses(guessInput) {
-    setGuessess([...guesses, guessInput]);
+    const nextGuessInput = [...guesses, guessInput];
+    setGuessess(nextGuessInput);
+    if (guessInput === answer) {
+      setGameStatus("win");
+    } else if (nextGuessInput.length >= 6) {
+      setGameStatus("lost");
+    }
   }
   return (
     <>
+      {gameStatus}
       <GuessResult guesses={guesses} answer={answer} />
       <GuessInput handleGuesses={handleGuesses} />
     </>

@@ -18,6 +18,8 @@ function GuessInput({ handleGuesses }) {
         required
         maxLength={5}
         minLength={5}
+        pattern="[a-zA-Z]{5}"
+        title="5 letter word"
         id="guess-input"
         type="text"
         value={input}
