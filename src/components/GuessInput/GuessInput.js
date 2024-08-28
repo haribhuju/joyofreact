@@ -2,8 +2,10 @@
 // 2. Requirements of uppercase, minlength and maxlength
 
 import React, { useState } from "react";
+import Win from "../Win/Win";
+import Lose from "../Lose/Lose";
 
-function GuessInput({ handleGuesses }) {
+function GuessInput({ handleGuesses, gameStatus, answer, guesses }) {
   const [input, setInput] = useState("");
 
   function handleSubmit(e) {
@@ -24,7 +26,10 @@ function GuessInput({ handleGuesses }) {
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value.toUpperCase())}
+        disabled={gameStatus !== "running"}
       />
+      {gameStatus === "win" && <Win guesses={guesses} />}
+      {gameStatus === "lost" && <Lose answer={answer} />}
     </form>
   );
 }
